@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>DotView.qml</file>
+        <file>MainWindow.qml</file>
+        <file>EditWindow.qml</file>
+        <file>ColorPickerRGB.qml</file>
+        <file>ColorPickerHSL.qml</file>
+        <file>ColorPickerSepcial.qml</file>
+
+        <file>components/Button.qml</file>
+        <file>components/ButtonOutlined.qml</file>
+        <file>components/RadioButton.qml</file>
+        <file>components/GroupBox.qml</file>
+        <file>components/Slider.qml</file>
+        <file>components/InputColor.qml</file>
+        <file>components/InputInt.qml</file>
+        <file>components/InputDouble.qml</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "qmlscene",
+            "options": {
+                "env": {
+                    // "QT_QUICK_CONTROLS_STYLE": "material",
+                    "QT_QUICK_CONTROLS_STYLE": "default",
+                    // "QT_QUICK_CONTROLS_MATERIAL_THEME": "Dark",
+                    // "QT_QUICK_CONTROLS_MATERIAL_VARIANT": "Dense"
+                }
+            },
+            "args": [
+                "'${file}'"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
