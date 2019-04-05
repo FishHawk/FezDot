@@ -39,8 +39,7 @@ int main(int argc, char *argv[]) {
     parser.addOption(QCommandLineOption({"e", "edit"}, "Edit dot style."));
     parser.process(app);
 
-
-    // Set theme
+    // Read setting
     QSettings::setPath(QSettings::defaultFormat(), QSettings::UserScope,
                        QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
     QSettings settings(QGuiApplication::applicationName());
@@ -56,7 +55,6 @@ int main(int argc, char *argv[]) {
         dot->setColors(i, settings.value(QString("color%1").arg(i),
                 QColor::fromHslF((i % 4) * 0.25, 1.0, 0.2, 0.6)).value<QColor>());
     }
-
 
     // Expose c++ to qml
     QQmlApplicationEngine::setObjectOwnership(dot, QQmlEngine::CppOwnership);
