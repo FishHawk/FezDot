@@ -1,7 +1,3 @@
-//
-// Created by wh on 3/2/19.
-//
-
 #include <QGuiApplication>
 #include <QSettings>
 #include <QStandardPaths>

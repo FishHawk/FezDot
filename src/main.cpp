@@ -27,9 +27,6 @@ int main(int argc, char *argv[]) {
     QApplication::setApplicationName("dot");
     QApplication::setApplicationDisplayName("Dot");
     QApplication::setApplicationVersion("1.0");
-//    QString icon = XDG::IconLookup::iconPath("albert");
-//    if ( icon.isEmpty() ) icon = ":app_icon";
-//    app.setWindowIcon(QIcon(icon));
 
     // Parse commandline
     QCommandLineParser parser;

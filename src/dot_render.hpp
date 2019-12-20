@@ -1,19 +1,13 @@
-//
-// Created by wh on 3/2/19.
-//
-
-#ifndef DOT_DOT_RENDER_HPP
-#define DOT_DOT_RENDER_HPP
+#ifndef DOT_RENDER_HPP
+#define DOT_RENDER_HPP
 
 #include <QtCore/QtMath>
-
-#include <QtGui/QOpenGLFunctions_3_3_Core>
+#include <QtGui/QMatrix4x4>
+#include <QtGui/QOpenGLBuffer>
 #include <QtGui/QOpenGLFramebufferObject>
+#include <QtGui/QOpenGLFunctions_3_3_Core>
 #include <QtGui/QOpenGLShaderProgram>
 #include <QtGui/QOpenGLVertexArrayObject>
-#include <QtGui/QOpenGLBuffer>
-#include <QtGui/QMatrix4x4>
-
 #include <QtQuick/QQuickFramebufferObject>
 #include <QtQuick/QQuickWindow>
 
@@ -25,12 +19,11 @@ public:
 
     void render() override;
 
-    void synchronize(QQuickFramebufferObject* item) override;
+    void synchronize(QQuickFramebufferObject *item) override;
 
     QOpenGLFramebufferObject *createFramebufferObject(const QSize &size) override;
 
 private:
-
     void GenerateVaoLine();
     void GenerateVaoFace();
 
@@ -44,15 +37,15 @@ private:
     QOpenGLVertexArrayObject vao_face;
     QOpenGLBuffer vbo_face_position, vbo_face_color;
 
-    QVector4D m_colors[8] {
-            QVector4D(0.5f,0.5f,0.0f, 1.6f)/2,
-            QVector4D(0.8f,0.2f,0.0f, 1.6f)/2,
-            QVector4D(0.8f,0.0f,0.2f, 1.6f)/2,
-            QVector4D(0.0f,0.8f,0.2f, 1.6f)/2,
-            QVector4D(0.2f,0.8f,0.0f, 1.6f)/2,
-            QVector4D(0.2f,0.0f,0.8f, 1.6f)/2,
-            QVector4D(0.0f,0.2f,0.8f, 1.6f)/2,
-            QVector4D(0.0f,0.5f,0.5f, 1.6f)/2,
+    QVector4D m_colors[8]{
+        QVector4D(0.5f, 0.5f, 0.0f, 1.6f) / 2,
+        QVector4D(0.8f, 0.2f, 0.0f, 1.6f) / 2,
+        QVector4D(0.8f, 0.0f, 0.2f, 1.6f) / 2,
+        QVector4D(0.0f, 0.8f, 0.2f, 1.6f) / 2,
+        QVector4D(0.2f, 0.8f, 0.0f, 1.6f) / 2,
+        QVector4D(0.2f, 0.0f, 0.8f, 1.6f) / 2,
+        QVector4D(0.0f, 0.2f, 0.8f, 1.6f) / 2,
+        QVector4D(0.0f, 0.5f, 0.5f, 1.6f) / 2,
     };
 
     DotFramebufferObject::RotatePlane m_plane = DotFramebufferObject::XY;
@@ -63,4 +56,4 @@ private:
     double m_angle2 = 0;
 };
 
-#endif //DOT_DOT_RENDER_HPP
+#endif

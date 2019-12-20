@@ -1,7 +1,3 @@
-//
-// Created by wh on 3/2/19.
-//
-
 #include "dot_fbo.hpp"
 #include "dot_render.hpp"
 
@@ -251,4 +247,3 @@ void DotRender::GenerateVaoFace() {
 
     vao_face.release();
 }
-
