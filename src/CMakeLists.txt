@@ -11,7 +11,7 @@ add_executable(dot
     dot_fbo.cpp
     dot_render.cpp
     qml/qml.qrc
-    glsl/shader.qrc)
+    glsl/glsl.qrc)
 
 target_compile_definitions(dot
     PRIVATE
