@@ -8,8 +8,8 @@ import Backend 1.0
 ApplicationWindow {
     id: mainWindow
 
-    width: 300
-    height: 300
+    width: 500
+    height: 500
 
     visible: true
     title: qsTr("Dot Render")
@@ -20,7 +20,7 @@ ApplicationWindow {
         sequence: "Ctrl+Q"
         onActivated: Qt.quit()
     }
-    
+
     DotView {
         anchors.fill: parent
 
