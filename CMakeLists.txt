@@ -9,7 +9,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Core Quick QuickControls2 REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets Quick QuickControls2 REQUIRED)
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
@@ -21,7 +21,7 @@ add_executable(${PROJECT_NAME}
 target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
 target_link_libraries(${PROJECT_NAME}
-        PRIVATE Qt5::Core Qt5::Quick Qt5::QuickControls2)
+        PRIVATE Qt5::Core Qt5::Widgets Qt5::Quick Qt5::QuickControls2)
 
 # install
 

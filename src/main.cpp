@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 
@@ -23,10 +23,10 @@ int main(int argc, char *argv[]) {
 
     // Initialize application
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
-    QGuiApplication::setApplicationName("dot");
-    QGuiApplication::setApplicationDisplayName("Dot");
-    QGuiApplication::setApplicationVersion("1.0");
+    QApplication app(argc, argv);
+    QApplication::setApplicationName("dot");
+    QApplication::setApplicationDisplayName("Dot");
+    QApplication::setApplicationVersion("1.0");
 //    QString icon = XDG::IconLookup::iconPath("albert");
 //    if ( icon.isEmpty() ) icon = ":app_icon";
 //    app.setWindowIcon(QIcon(icon));
@@ -70,5 +70,5 @@ int main(int argc, char *argv[]) {
     if (engine.rootObjects().isEmpty())
         return -1;
 
-    return QGuiApplication::exec();
+    return QApplication::exec();
 }

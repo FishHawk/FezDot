@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.4
 
 import "." as Com
 
@@ -11,28 +12,23 @@ RowLayout {
     property double from: 0.0
     property double to: 1.0
 
-    Text {
+    Label {
         text: label
-        // MouseArea {
-        //     anchors.fill: parent
-        //     onClicked: {
-        //         console.log(control.value)
-        //         control.value = 0.5
-        //     }
-        // }
     }
-    Com.Slider {
+    Slider {
         value: control.value
         from: control.from
         to: control.to
-        stepSize: Math.abs(to - from) / 100
 
         onMoved: control.value = value
     }
-    TextInput {
-        Layout.preferredWidth: 30
+    TextField {
+        Layout.preferredWidth: 60
         text: control.value.toPrecision(3)
         validator: DoubleValidator{bottom: control.from; top: control.to;}
         onAccepted: control.value = parseFloat(text)
+    }
+    Item {
+        Layout.fillWidth: true
     }
 }

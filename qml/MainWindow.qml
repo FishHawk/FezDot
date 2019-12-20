@@ -8,8 +8,6 @@ import Backend 1.0
 ApplicationWindow {
     id: mainWindow
 
-    x: 0
-    y: 0
     width: 300
     height: 300
 
@@ -44,5 +42,4 @@ ApplicationWindow {
             mainWindow.y += delta.y;
         }
     }
-
 }

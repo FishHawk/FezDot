@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.4
 
 import "." as Com
 
@@ -11,20 +12,18 @@ RowLayout {
     property int from: 0
     property int to: 100
 
-    Text {
+    Label {
         text: label
     }
-    Com.Slider {
-
+    Slider {
         value: root.value
         from: root.from
         to: root.to
-        stepSize: Math.abs(to - from) / 100
 
         onMoved: root.value = Math.round(value)
     }
-    TextInput {
-        Layout.minimumWidth: 30
+    TextField {
+        Layout.preferredWidth: 45
         text: root.value
         validator: IntValidator{bottom: root.from; top: root.to;}
         onAccepted: root.value = parseFloat(text)

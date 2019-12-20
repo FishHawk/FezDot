@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.4
 
 import "." as Com
 
@@ -26,7 +27,7 @@ RowLayout {
     }
 
     ColumnLayout {
-        Text {
+        Label {
             Layout.topMargin: 5
             text: label
         }
@@ -127,6 +128,4 @@ RowLayout {
             PropertyChanges { target: inputA; visible: true }
         }
     ]
-
-
 }
