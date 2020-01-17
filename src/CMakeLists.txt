@@ -8,10 +8,11 @@ find_package(Qt5 COMPONENTS Core Widgets Quick QuickControls2 REQUIRED)
 
 add_executable(dot
     main.cpp
+    backend.cpp
     dot_fbo.cpp
     dot_render.cpp
     qml/qml.qrc
-    glsl/glsl.qrc)
+    shader/shader.qrc)
 
 target_compile_definitions(dot
     PRIVATE

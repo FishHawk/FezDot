@@ -1,8 +1,12 @@
 import QtQuick 2.12
+
 import Backend 1.0
 
 ShaderEffect {
-    property variant src: Dot
+    property variant src: Backend.dot
+
+    Binding { target: Backend.dot; property: "height"; value: height; delayed: false}
+    Binding { target: Backend.dot; property: "width"; value: width; delayed: false }
 
     vertexShader: "
         uniform highp mat4 qt_Matrix;
@@ -19,12 +23,6 @@ ShaderEffect {
         uniform lowp float qt_Opacity;
         void main() {
             lowp vec4 tex = texture2D(src, coord);
-
             gl_FragColor = vec4(tex.rgb * tex.a, tex.a);
-            /*
-            if (tex.a > 0.2)
-                gl_FragColor = vec4(tex.rgb * 0.8, 0.8);
-            else
-                gl_FragColor = vec4(tex.rgb * tex.a, tex.a);*/
         }"
 }

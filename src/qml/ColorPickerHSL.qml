@@ -16,10 +16,10 @@ GridLayout {
             label: "color" + index + ":"
             mode: Com.InputColor.HSLA
             onValueChanged: {
-                Dot.setColors(index, value)
+                Backend.dot.setColors(index, value)
             }
             Component.onCompleted: {
-                setColor(Dot.colors(index))
+                setColor(Backend.dot.colors(index))
             }
         }
     }

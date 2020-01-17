@@ -8,38 +8,36 @@ import Backend 1.0
 ApplicationWindow {
     id: mainWindow
 
-    width: 500
-    height: 500
+    width: 100
+    height: 100
 
     visible: true
     title: qsTr("Dot Render")
     color: "transparent"
     flags: Qt.Window | Qt.Tool | Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.WindowStaysOnTopHint
 
+    DotView { anchors.fill: parent }
+
     Shortcut {
         sequence: "Ctrl+Q"
         onActivated: Qt.quit()
     }
 
-    DotView {
-        anchors.fill: parent
-
-        Binding { target: Dot; property: "height"; value: height; delayed: false}
-        Binding { target: Dot; property: "width"; value: width; delayed: false }
-    }
-
     MouseArea {
-        anchors.fill: parent;
-        property point clickPos
-
-        onPressed: {
-            clickPos = Qt.point(mouse.x,mouse.y)
+        anchors.fill: parent
+        acceptedButtons: Qt.RightButton
+        onClicked: contextMenu.popup()
+        onPressAndHold: {
+            if (mouse.source === Qt.MouseEventNotSynthesized)
+                contextMenu.popup()
         }
 
-        onPositionChanged: {
-            var delta = Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
-            mainWindow.x += delta.x;
-            mainWindow.y += delta.y;
+        Menu {
+            id: contextMenu
+            Action { text: qsTr("Edit"); onTriggered: editWindow.visible = true }
+            Action { text: qsTr("Quit"); onTriggered: Qt.quit() }
         }
     }
+
+    EditWindow { id: editWindow; visible: true }
 }

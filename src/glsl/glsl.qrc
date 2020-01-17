@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>dot_v.glsl</file>
-        <file>dot_f.glsl</file>
-    </qresource>
-</RCC>

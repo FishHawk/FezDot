@@ -6,10 +6,10 @@ import "components" as Com
 import Backend 1.0
 
 ColumnLayout {
-    property variant colors: [Dot.colors(0), Dot.colors(1), Dot.colors(2), Dot.colors(3), 
-                                Dot.colors(4), Dot.colors(5), Dot.colors(6), Dot.colors(7)]
+    property variant colors: [Backend.dot.colors(0), Backend.dot.colors(1), Backend.dot.colors(2), Backend.dot.colors(3),
+                                Backend.dot.colors(4), Backend.dot.colors(5), Backend.dot.colors(6), Backend.dot.colors(7)]
 
-    
+
     function notifyColorsChange() {
         var tmp =  colors;
         colors = tmp;
@@ -19,7 +19,7 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.alignment : Qt.AlignHCenter
         spacing: 15
-        
+
         Repeater {
             model: 8
             Rectangle {
@@ -48,10 +48,10 @@ ColumnLayout {
             id: hueStart
             label: "HueStart"
             onValueChanged: {
-                for (var i = 0; i < 8; i++) {                   
+                for (var i = 0; i < 8; i++) {
                      var hue = hueStart.value + hueStep.value * i
                     colors[i].hslHue = (hue - Math.floor(hue))
-                    Dot.setColors(i, colors[i])
+                    Backend.dot.setColors(i, colors[i])
                 }
                 notifyColorsChange()
             }
@@ -66,7 +66,7 @@ ColumnLayout {
                 for (var i = 0; i < 8; i++) {
                     var hue = hueStart.value + hueStep.value * i
                     colors[i].hslHue = (hue - Math.floor(hue))
-                    Dot.setColors(i, colors[i])
+                    Backend.dot.setColors(i, colors[i])
                 }
                 notifyColorsChange()
             }
@@ -80,13 +80,13 @@ ColumnLayout {
             onValueChanged: {
                 for (var i = 0; i < 8; i++) {
                     colors[i].hslLightness = lightness.value
-                    Dot.setColors(i, colors[i])
+                    Backend.dot.setColors(i, colors[i])
                 }
                 notifyColorsChange()
             }
 
             Component.onCompleted: {
-                value = Dot.colors(0).hslLightness
+                value = Backend.dot.colors(0).hslLightness
             }
         }
 
@@ -97,13 +97,13 @@ ColumnLayout {
             onValueChanged: {
                 for (var i = 0; i < 8; i++) {
                     colors[i].hslSaturation = saturation.value
-                    Dot.setColors(i, colors[i])
+                    Backend.dot.setColors(i, colors[i])
                 }
                 notifyColorsChange()
             }
 
             Component.onCompleted: {
-                value = Dot.colors(0).hslSaturation
+                value = Backend.dot.colors(0).hslSaturation
             }
         }
 
@@ -114,13 +114,13 @@ ColumnLayout {
             onValueChanged: {
                 for (var i = 0; i < 8; i++) {
                     colors[i].a = alpha.value
-                    Dot.setColors(i, colors[i])
+                    Backend.dot.setColors(i, colors[i])
                 }
                 notifyColorsChange()
             }
 
             Component.onCompleted: {
-                value = Dot.colors(0).a
+                value = Backend.dot.colors(0).a
             }
         }
     }

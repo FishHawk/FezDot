@@ -16,6 +16,7 @@ RowLayout {
         text: label
     }
     Slider {
+        Layout.fillWidth:true;
         value: root.value
         from: root.from
         to: root.to

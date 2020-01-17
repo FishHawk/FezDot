@@ -4,8 +4,8 @@
 DotRender::DotRender() {
     initializeOpenGLFunctions();
 
-    program.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, ":/dot_v.glsl");
-    program.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, ":/dot_f.glsl");
+    program.addCacheableShaderFromSourceFile(QOpenGLShader::Vertex, ":/dot.vert");
+    program.addCacheableShaderFromSourceFile(QOpenGLShader::Fragment, ":/dot.frag");
     program.link();
     program.release();
 
