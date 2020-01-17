@@ -16,12 +16,15 @@ public:
 signals:
     void themesChanged();
 
+public:
+    Q_INVOKABLE void saveTheme(QString theme);
+    Q_INVOKABLE void loadTheme(QString theme);
+
+    Backend();
+
 private:
     QStringList m_themes;
     DotFramebufferObject *m_dot;
-
-public:
-    Backend();
 };
 
 #endif

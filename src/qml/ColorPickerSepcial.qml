@@ -6,8 +6,8 @@ import "components" as Com
 import Backend 1.0
 
 ColumnLayout {
-    property variant colors: [Backend.dot.colors(0), Backend.dot.colors(1), Backend.dot.colors(2), Backend.dot.colors(3),
-                                Backend.dot.colors(4), Backend.dot.colors(5), Backend.dot.colors(6), Backend.dot.colors(7)]
+    property variant colors: [Backend.dot.colors[0], Backend.dot.colors[1], Backend.dot.colors[2], Backend.dot.colors[3],
+                                Backend.dot.colors[4], Backend.dot.colors[5], Backend.dot.colors[6], Backend.dot.colors[7]]
 
 
     function notifyColorsChange() {
@@ -86,7 +86,7 @@ ColumnLayout {
             }
 
             Component.onCompleted: {
-                value = Backend.dot.colors(0).hslLightness
+                value = Backend.dot.colors[0].hslLightness
             }
         }
 
@@ -103,7 +103,7 @@ ColumnLayout {
             }
 
             Component.onCompleted: {
-                value = Backend.dot.colors(0).hslSaturation
+                value = Backend.dot.colors[0].hslSaturation
             }
         }
 
@@ -120,7 +120,7 @@ ColumnLayout {
             }
 
             Component.onCompleted: {
-                value = Backend.dot.colors(0).a
+                value = Backend.dot.colors[0].a
             }
         }
     }

@@ -19,7 +19,7 @@ GridLayout {
                 Backend.dot.setColors(index, value)
             }
             Component.onCompleted: {
-                setColor(Backend.dot.colors(index))
+                setColor(Backend.dot.colors[index])
             }
         }
     }

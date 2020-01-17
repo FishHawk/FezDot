@@ -22,7 +22,7 @@ void DotRender::synchronize(QQuickFramebufferObject *item) {
     m_angleVelocity2 = derived->velocity2();
 
     for (int i = 0; i < 8; ++i) {
-        auto color = derived->colors(i);
+        auto color = derived->colors()[i];
         m_colors[i].setX(static_cast<float>(color.redF()));
         m_colors[i].setY(static_cast<float>(color.greenF()));
         m_colors[i].setZ(static_cast<float>(color.blueF()));
