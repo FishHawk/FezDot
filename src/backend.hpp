@@ -14,17 +14,22 @@ public:
     DotFramebufferObject *dot() { return m_dot; }
 
 signals:
+    void selectedThemeChanged();
     void themesChanged();
 
 public:
     Q_INVOKABLE void saveTheme(QString theme);
     Q_INVOKABLE void loadTheme(QString theme);
+    Q_INVOKABLE void deleteTheme(QString theme);
 
     Backend();
 
 private:
     QStringList m_themes;
+
     DotFramebufferObject *m_dot;
+
+    void loadThemeList();
 };
 
 #endif

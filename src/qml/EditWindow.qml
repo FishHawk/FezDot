@@ -20,7 +20,14 @@ ApplicationWindow {
     maximumHeight: height
     maximumWidth: width
 
-    DialogNewTheme { id: newThemeDialog; visible: false; }
+    DialogNewTheme {
+        id: newThemeDialog;
+        visible: false;
+        onAccepted: {
+            Backend.saveTheme(newThemeName)
+            theme.currentIndex = theme.indexOfValue(newThemeName)
+        }
+    }
 
     ColumnLayout {
         id: mainLayout
@@ -32,11 +39,16 @@ ApplicationWindow {
 
             ColumnLayout {
                 Label { text: qsTr("Choose Theme:") }
-                ComboBox { Layout.fillWidth: true; model: Backend.themes }
+                ComboBox {
+                    id: theme
+                    Layout.fillWidth: true
+                    model: Backend.themes
+                    onActivated: Backend.loadTheme(theme.currentText)
+                }
                 RowLayout{
-                    Button { text: "Save"; onClicked: Backend.dot.saveChange() }
-                    Button { text: "New"; onClicked: newThemeDialog.open() }
-                    Button { text: "Delete" }
+                    Button { text: "Save"; onClicked: Backend.saveTheme(theme.currentText) }
+                    Button { text: "Save as"; onClicked: newThemeDialog.open() }
+                    Button { text: "Delete"; onClicked: Backend.deleteTheme(theme.currentText) }
                 }
             }
 

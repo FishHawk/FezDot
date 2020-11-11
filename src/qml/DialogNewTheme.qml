@@ -2,6 +2,8 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 
+import Backend 1.0
+
 Dialog {
     property string baseThemeName: "default"
     property string newThemeName: newThemeNameInput.text
@@ -12,7 +14,6 @@ Dialog {
     modal: true
     standardButtons: Dialog.Ok | Dialog.Cancel
 
-    onAccepted: console.log("Ok clicked")
     RowLayout {
         spacing: 40
         Label { text: qsTr("Name:") }

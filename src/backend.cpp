@@ -9,14 +9,7 @@
 Backend::Backend() {
     m_dot = new DotFramebufferObject();
 
-    // read all theme
-    QString themeLocation = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append("/themes");
-    m_themes = QDir(themeLocation).entryList(QStringList() << "*.conf", QDir::Files);
-    for (auto &theme : m_themes)
-        theme.truncate(theme.lastIndexOf(QChar('.')));
-    if (!m_themes.contains("default"))
-        m_themes.append("default");
-    qDebug()<<m_themes;
+    loadThemeList();
 
     // read settings
     QSettings::setPath(QSettings::defaultFormat(), QSettings::UserScope,
@@ -28,6 +21,17 @@ Backend::Backend() {
     loadTheme(theme);
 }
 
+void Backend::loadThemeList() {
+    QString themeLocation = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append("/themes");
+    m_themes = QDir(themeLocation).entryList(QStringList() << "*.conf", QDir::Files);
+    for (auto &theme : m_themes)
+        theme.truncate(theme.lastIndexOf(QChar('.')));
+    if (!m_themes.contains("default"))
+        m_themes.append("default");
+
+    themesChanged();
+}
+
 void Backend::saveTheme(QString theme) {
     QSettings settings("themes/" + theme);
 
@@ -37,12 +41,12 @@ void Backend::saveTheme(QString theme) {
     for (int i = 0; i < 8; ++i) {
         settings.setValue(QString("color%1").arg(i), (m_dot->colors())[i]);
     }
+    settings.sync();
+
+    loadThemeList();
 }
 
 void Backend::loadTheme(QString theme) {
-    if (!m_themes.contains(theme))
-        theme = "default";
-
     QSettings settings("themes/" + theme);
 
     m_dot->setPlane(static_cast<DotFramebufferObject::RotatePlane>(settings.value("plane", 0).toUInt()));
@@ -51,4 +55,14 @@ void Backend::loadTheme(QString theme) {
     for (int i = 0; i < 8; ++i) {
         m_dot->setColors(i, settings.value(QString("color%1").arg(i), QColor::fromHslF((i % 4) * 0.25, 1.0, 0.2, 0.6)).value<QColor>());
     }
+
+    loadThemeList();
+}
+
+void Backend::deleteTheme(QString theme) {
+    auto filepath = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append(QString("/themes/%1.conf").arg(theme));
+    auto file = QFile(filepath);
+    file.remove();
+
+    loadThemeList();
 }
