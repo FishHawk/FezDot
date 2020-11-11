@@ -20,30 +20,30 @@ ApplicationWindow {
     maximumHeight: height
     maximumWidth: width
 
+    DialogNewTheme { id: newThemeDialog; visible: false; }
+
     ColumnLayout {
         id: mainLayout
         anchors.fill: parent
         anchors.margins: 11
 
         RowLayout {
+            Layout.bottomMargin: 20
             spacing: 40
+
             ColumnLayout {
                 Label { text: qsTr("Choose Theme:") }
-                ComboBox {
-                    Layout.fillWidth: true
-                    model: Backend.themes
-                }
+                ComboBox { Layout.fillWidth: true; model: Backend.themes }
                 RowLayout{
-                    Button { text:"Save"; onClicked: Backend.dot.saveChange() }
-                    Button { text:"Save As" }
-                    Button { text:"Cancel" }
+                    Button { text: "Save"; onClicked: Backend.dot.saveChange() }
+                    Button { text: "New"; onClicked: newThemeDialog.open() }
+                    Button { text: "Delete" }
                 }
             }
+
             ColumnLayout {
                 RowLayout {
-                    Label {
-                        text: qsTr("Rotate Plane:")
-                    }
+                    Label { text: qsTr("Rotate Plane:") }
                     RadioButton {
                         checked: Backend.dot.plane == Backend.dot.XY
                         text: qsTr("XY")

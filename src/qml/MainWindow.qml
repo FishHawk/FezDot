@@ -8,8 +8,8 @@ import Backend 1.0
 ApplicationWindow {
     id: mainWindow
 
-    width: 100
-    height: 100
+    width: 400
+    height: 400
 
     visible: true
     title: qsTr("Dot Render")
@@ -18,10 +18,8 @@ ApplicationWindow {
 
     DotView { anchors.fill: parent }
 
-    Shortcut {
-        sequence: "Ctrl+Q"
-        onActivated: Qt.quit()
-    }
+    Shortcut { sequence: "Ctrl+E"; onActivated: editWindow.visible = true }
+    Shortcut { sequence: "Ctrl+Q"; onActivated: Qt.quit() }
 
     MouseArea {
         anchors.fill: parent
@@ -39,5 +37,5 @@ ApplicationWindow {
         }
     }
 
-    EditWindow { id: editWindow; visible: true }
+    EditWindow { id: editWindow; visible: false }
 }

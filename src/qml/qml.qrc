@@ -1,9 +1,12 @@
 <RCC>
     <qresource prefix="/">
         <file>MainWindow.qml</file>
+        <file>EditWindow.qml</file>
+
         <file>DotView.qml</file>
 
-        <file>EditWindow.qml</file>
+        <file>DialogNewTheme.qml</file>
+
         <file>ColorPickerRGB.qml</file>
         <file>ColorPickerHSL.qml</file>
         <file>ColorPickerSepcial.qml</file>
