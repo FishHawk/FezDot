@@ -25,10 +25,9 @@ ApplicationWindow {
     ColumnLayout {
         id: mainLayout
         anchors.fill: parent
-        anchors.margins: 11
 
         RowLayout {
-            Layout.bottomMargin: 20
+            Layout.margins: 20
             spacing: 40
 
             ColumnLayout {
@@ -60,6 +59,7 @@ ApplicationWindow {
                         onClicked: Backend.dot.plane = Backend.dot.XW
                     }
                 }
+
                 Com.InputDouble {
                     label: qsTr("Rotate Velocity (angle1):")
                     value: Backend.dot.velocity1
@@ -78,20 +78,25 @@ ApplicationWindow {
         }
 
         TabBar {
-            Layout.fillWidth: true
             id: bar
+            Layout.fillWidth: true
             Repeater {
-                model: [qsTr("RGB Mode"), qsTr("HSL Mode"), qsTr("Special Mode")]
+                model: [qsTr("RGB Mode"), qsTr("HSL Mode"), qsTr("Easy Mode")]
                 TabButton { text: modelData; width: bar.width / model.length }
             }
         }
 
-        StackLayout {
+        SwipeView {
             Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.margins: 20
+            clip: true
             currentIndex: bar.currentIndex
+            interactive: false
+
             ColorPickerRGB {}
             ColorPickerHSL {}
-            ColorPickerSepcial {}
+            ColorPickerEasy {}
         }
     }
 }

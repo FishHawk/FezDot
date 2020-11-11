@@ -7,9 +7,9 @@
 
         <file>DialogNewTheme.qml</file>
 
-        <file>ColorPickerRGB.qml</file>
+        <file>ColorPickerEasy.qml</file>
         <file>ColorPickerHSL.qml</file>
-        <file>ColorPickerSepcial.qml</file>
+        <file>ColorPickerRGB.qml</file>
 
         <file>components/InputColor.qml</file>
         <file>components/InputInt.qml</file>

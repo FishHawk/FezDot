@@ -124,5 +124,7 @@ ColumnLayout {
             }
         }
     }
+
+    Item { Layout.fillHeight: true }
 }
 
