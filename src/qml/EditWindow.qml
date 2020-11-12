@@ -33,7 +33,7 @@ ApplicationWindow {
 
     ColumnLayout {
         id: mainLayout
-        anchors.centerIn: parent
+        anchors.fill: parent
 
         RowLayout {
             Layout.margins: 20
