@@ -11,8 +11,8 @@ import Backend 1.0
 
 ApplicationWindow {
     title: qsTr("Dot Setting")
-    width: mainLayout.implicitWidth + 22
-    height: mainLayout.implicitHeight + 22
+    width: mainLayout.implicitWidth
+    height: mainLayout.implicitHeight
 
     minimumHeight: height
     minimumWidth: width
@@ -20,18 +20,21 @@ ApplicationWindow {
     maximumHeight: height
     maximumWidth: width
 
+    onClosing: settings.saveAllSettings()
+
     DialogNewTheme {
-        id: newThemeDialog;
-        visible: false;
+        id: newThemeDialog
+        visible: false
         onAccepted: {
             Backend.saveTheme(newThemeName)
-            theme.currentIndex = theme.indexOfValue(newThemeName)
+            themeSelector.currentIndex = themeSelector.indexOfValue(newThemeName)
+            settings.selectedTheme = currentText
         }
     }
 
     ColumnLayout {
         id: mainLayout
-        anchors.fill: parent
+        anchors.centerIn: parent
 
         RowLayout {
             Layout.margins: 20
@@ -40,15 +43,19 @@ ApplicationWindow {
             ColumnLayout {
                 Label { text: qsTr("Choose Theme:") }
                 ComboBox {
-                    id: theme
+                    id: themeSelector
                     Layout.fillWidth: true
                     model: Backend.themes
-                    onActivated: Backend.loadTheme(theme.currentText)
+                    onActivated: {
+                        Backend.loadTheme(currentText)
+                        settings.selectedTheme = currentText
+                    }
+                    Component.onCompleted: currentText = settings.selectedTheme
                 }
                 RowLayout{
-                    Button { text: "Save"; onClicked: Backend.saveTheme(theme.currentText) }
+                    Button { text: "Save"; onClicked: Backend.saveTheme(themeSelector.currentText) }
                     Button { text: "Save as"; onClicked: newThemeDialog.open() }
-                    Button { text: "Delete"; onClicked: Backend.deleteTheme(theme.currentText) }
+                    Button { text: "Delete"; onClicked: Backend.deleteTheme(themeSelector.currentText) }
                 }
             }
 

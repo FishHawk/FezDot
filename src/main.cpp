@@ -32,6 +32,10 @@ int main(int argc, char *argv[]) {
         if (!QDir(location).mkpath("."))
             qFatal("Could not create dir: %s", qPrintable(location));
 
+    // set config path
+    QSettings::setPath(QSettings::defaultFormat(), QSettings::UserScope,
+                       QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
+
     // parse commandline
     QCommandLineParser parser;
     parser.setApplicationDescription("Fez Dot.");
@@ -40,7 +44,7 @@ int main(int argc, char *argv[]) {
     parser.process(app);
 
     // start backend
-    backend = new Backend;
+    backend = new Backend();
     QQmlApplicationEngine::setObjectOwnership(backend, QQmlEngine::CppOwnership);
     qmlRegisterSingletonType<Backend>("Backend", 1, 0, "Backend", getBackend);
 

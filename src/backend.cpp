@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
-#include <QSettings>
 #include <QStandardPaths>
 
 Backend::Backend() {

@@ -16,6 +16,8 @@ ApplicationWindow {
     color: "transparent"
     flags: Qt.Window | Qt.Tool | Qt.FramelessWindowHint | Qt.WindowSystemMenuHint | Qt.WindowStaysOnTopHint
 
+    ApplicationSettings { id: settings }
+
     DotView { anchors.fill: parent }
 
     Shortcut { sequence: "Ctrl+E"; onActivated: editWindow.visible = true }
