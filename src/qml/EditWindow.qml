@@ -27,7 +27,6 @@ ApplicationWindow {
         visible: false
         onAccepted: {
             Backend.saveTheme(newThemeName)
-            themeSelector.currentIndex = themeSelector.indexOfValue(newThemeName)
             settings.selectedTheme = currentText
         }
     }
@@ -50,7 +49,10 @@ ApplicationWindow {
                         Backend.loadTheme(currentText)
                         settings.selectedTheme = currentText
                     }
-                    Component.onCompleted: currentText = settings.selectedTheme
+                    Connections {
+                        target: settings
+                        onSelectedThemeChanged: themeSelector.currentIndex = themeSelector.indexOfValue(settings.selectedTheme)
+                    }
                 }
                 RowLayout{
                     Button { text: "Save"; onClicked: Backend.saveTheme(themeSelector.currentText) }
