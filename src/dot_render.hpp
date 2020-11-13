@@ -2,6 +2,7 @@
 #define DOT_RENDER_HPP
 
 #include <QtCore/QtMath>
+#include <QtCore/QElapsedTimer>
 #include <QtGui/QMatrix4x4>
 #include <QtGui/QOpenGLBuffer>
 #include <QtGui/QOpenGLFramebufferObject>
@@ -54,6 +55,9 @@ private:
 
     double m_angle1 = 30.0;
     double m_angle2 = 0;
+
+    QElapsedTimer timer;
+
 };
 
 #endif

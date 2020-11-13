@@ -1,5 +1,5 @@
-#include "dot_fbo.hpp"
 #include "dot_render.hpp"
+#include "dot_fbo.hpp"
 
 DotRender::DotRender() {
     initializeOpenGLFunctions();
@@ -11,10 +11,13 @@ DotRender::DotRender() {
 
     GenerateVaoLine();
     GenerateVaoFace();
+
+    timer.start();
 }
 
 void DotRender::synchronize(QQuickFramebufferObject *item) {
-    if (!window) window = item->window();
+    if (!window)
+        window = item->window();
 
     auto derived = qobject_cast<DotFramebufferObject *>(item);
     m_plane = derived->plane();
@@ -52,6 +55,11 @@ QOpenGLFramebufferObject *DotRender::createFramebufferObject(const QSize &size) 
 }
 
 void DotRender::render() {
+    auto timeInterval = timer.restart();
+
+    m_angle1 += m_angleVelocity1 * 3 * 0.001 * timeInterval;
+    m_angle2 += m_angleVelocity2 * 3 * 0.001 * timeInterval;
+
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -66,15 +74,15 @@ void DotRender::render() {
     QMatrix4x4 rotate;
     QList<int> index;
     switch (m_plane) {
-        case DotFramebufferObject::XY:
-            index << 0 << 1 << 2 << 3;
-            break;
-        case DotFramebufferObject::XZ:
-            index << 0 << 2 << 1 << 3;
-            break;
-        case DotFramebufferObject::XW:
-            index << 0 << 3 << 1 << 2;
-            break;
+    case DotFramebufferObject::XY:
+        index << 0 << 1 << 2 << 3;
+        break;
+    case DotFramebufferObject::XZ:
+        index << 0 << 2 << 1 << 3;
+        break;
+    case DotFramebufferObject::XW:
+        index << 0 << 3 << 1 << 2;
+        break;
     }
     rotate(index[0], index[0]) = static_cast<float>(qCos(m_angle1));
     rotate(index[1], index[1]) = static_cast<float>(qCos(m_angle1));
@@ -99,7 +107,7 @@ void DotRender::render() {
     program.setUniformValue("projection", projection);
 
     vao_line.bind();
-//        glDrawArrays(GL_LINES, 0, 2 * 32);
+    //        glDrawArrays(GL_LINES, 0, 2 * 32);
     vao_line.release();
 
     vao_face.bind();
@@ -107,7 +115,6 @@ void DotRender::render() {
     vao_face.release();
 
     program.release();
-
 
     if (window) {
         window->resetOpenGLState();
@@ -117,12 +124,8 @@ void DotRender::render() {
         glDisable(GL_CULL_FACE);
     }
 
-    m_angle1 += m_angleVelocity1 * 0.05;
-    m_angle2 += m_angleVelocity2 * 0.05;
-
     update();
 }
-
 
 void DotRender::GenerateVaoLine() {
     QVector4D vertices[16];
@@ -149,7 +152,7 @@ void DotRender::GenerateVaoLine() {
 
     QVector4D line_color[2 * 32];
     QVector4D color(0.0f, 0.0f, 0.0f, 1.0f);
-    for (auto &c:line_color) {
+    for (auto &c : line_color) {
         c = color;
     }
 
