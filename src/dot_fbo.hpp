@@ -8,7 +8,6 @@
 class DotFramebufferObject : public QQuickFramebufferObject {
     Q_OBJECT
 public:
-    Q_PROPERTY(QString m_theme READ theme WRITE setTheme NOTIFY themeChanged)
     Q_PROPERTY(RotatePlane plane READ plane WRITE setPlane NOTIFY planeChanged)
     Q_PROPERTY(double velocity1 READ velocity1 WRITE setVelocity1 NOTIFY velocity1Changed)
     Q_PROPERTY(double velocity2 READ velocity2 WRITE setVelocity2 NOTIFY velocity2Changed)
@@ -19,31 +18,32 @@ public:
                        XW };
     Q_ENUM(RotatePlane)
 
-    QString theme() { return m_theme; }
     RotatePlane plane() { return m_plane; }
     double velocity1() { return m_velocity1; }
     double velocity2() { return m_velocity2; }
     QVector<QColor> colors() { return m_colors; }
 
-    void setTheme(QString theme) {
-        m_theme = theme;
-        update();
-    }
     void setPlane(RotatePlane plane) {
         m_plane = plane;
+        planeChanged();
         update();
     }
     void setVelocity1(double velocity) {
-        m_velocity1 = velocity;
-        update();
+        if (m_velocity1 != velocity) {
+            m_velocity1 = velocity;
+            velocity1Changed();
+            update();
+        }
     }
     void setVelocity2(double velocity) {
-        m_velocity2 = velocity;
-        update();
+        if (m_velocity2 != velocity) {
+            m_velocity2 = velocity;
+            velocity2Changed();
+            update();
+        }
     }
 
 signals:
-    void themeChanged();
     void planeChanged();
     void velocity1Changed();
     void velocity2Changed();
@@ -61,7 +61,6 @@ public:
     Renderer *createRenderer() const override;
 
 private:
-    QString m_theme;
     RotatePlane m_plane;
     double m_velocity1;
     double m_velocity2;

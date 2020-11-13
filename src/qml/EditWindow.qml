@@ -65,19 +65,19 @@ ApplicationWindow {
                 RowLayout {
                     Label { text: qsTr("Rotate Plane:") }
                     RadioButton {
-                        checked: Backend.dot.plane == Backend.dot.XY
+                        checked: Backend.dot.plane == Dot.XY
                         text: qsTr("XY")
-                        onClicked: Backend.dot.plane = Backend.dot.XY
+                        onClicked: Backend.dot.plane = Dot.XY
                     }
                     RadioButton {
-                        checked: Backend.dot.plane == Backend.dot.XZ
+                        checked: Backend.dot.plane == Dot.XZ
                         text: qsTr("XZ")
-                        onClicked: Backend.dot.plane = Backend.dot.XZ
+                        onClicked: Backend.dot.plane = Dot.XZ
                     }
                     RadioButton {
-                        checked: Backend.dot.plane == Backend.dot.XW
+                        checked: Backend.dot.plane == Dot.XW
                         text: qsTr("XW")
-                        onClicked: Backend.dot.plane = Backend.dot.XW
+                        onClicked: Backend.dot.plane = Dot.XW
                     }
                 }
 

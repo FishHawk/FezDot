@@ -15,11 +15,14 @@ GridLayout {
         Com.InputColor {
             label: "color" + index + ":"
             mode: Com.InputColor.RGBA
-            onValueChanged: {
-                Backend.dot.setColors(index, value)
-            }
-            Component.onCompleted: {
-                setColor(Backend.dot.colors[index])
+            onValueChanged: Backend.dot.setColors(index, value)
+
+            Connections {
+                target: Backend.dot
+                onColorsChanged: {
+                    let newColor = Backend.dot.colors[index]
+                    if (newColor != value) setColor(newColor)
+                }
             }
         }
     }

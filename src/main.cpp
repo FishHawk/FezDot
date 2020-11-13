@@ -47,6 +47,7 @@ int main(int argc, char *argv[]) {
     backend = new Backend();
     QQmlApplicationEngine::setObjectOwnership(backend, QQmlEngine::CppOwnership);
     qmlRegisterSingletonType<Backend>("Backend", 1, 0, "Backend", getBackend);
+    qmlRegisterType<DotFramebufferObject>("Backend", 1, 0, "Dot");
 
     // start qml engine
     QQmlApplicationEngine engine;
