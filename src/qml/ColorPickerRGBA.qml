@@ -10,28 +10,28 @@ ColumnLayout {
     function distributeR() {
         for (let i = 0; i < 8; i++) {
             let valueR = startR.value + stepR.value * i
-            colors.itemAt(i).value.r = (valueR % 255) / 255
+            colors.itemAt(i).value.r = (valueR % 256) / 255
         }
     }
 
     function distributeG() {
         for (let i = 0; i < 8; i++) {
             let valueG = startG.value + stepG.value * i
-            colors.itemAt(i).value.g = (valueG % 255) / 255
+            colors.itemAt(i).value.g = (valueG % 256) / 255
         }
     }
 
     function distributeB() {
         for (let i = 0; i < 8; i++) {
             let valueB = startB.value + stepB.value * i
-            colors.itemAt(i).value.b = (valueB % 255) / 255
+            colors.itemAt(i).value.b = (valueB % 256) / 255
         }
     }
 
     function distributeA() {
         for (let i = 0; i < 8; i++) {
             let valueA = startA.value + stepA.value * i
-            colors.itemAt(i).value.a = (valueA % 255) / 255
+            colors.itemAt(i).value.a = (valueA % 256) / 255
         }
     }
 
@@ -43,7 +43,7 @@ ColumnLayout {
             onValueChanged: Backend.dot.setColors(index, value)
             Connections {
                 target: Backend.dot
-                onColorsChanged: {
+                function onColorsChanged() {
                     let newColor = Backend.dot.colors[index]
                     if (newColor != value) value = newColor
                 }

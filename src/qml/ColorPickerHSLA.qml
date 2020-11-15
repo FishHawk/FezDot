@@ -17,21 +17,21 @@ ColumnLayout {
     function distributeS() {
         for (let i = 0; i < 8; i++) {
             let valueS = startS.value + stepS.value * i
-            colors.itemAt(i).value.hslSaturation = (valueS % 100) / 100
+            colors.itemAt(i).value.hslSaturation = (valueS % 101) / 100
         }
     }
 
     function distributeL() {
         for (let i = 0; i < 8; i++) {
             let valueL = startL.value + stepL.value * i
-            colors.itemAt(i).value.hslLightness = (valueL % 100) / 100
+            colors.itemAt(i).value.hslLightness = (valueL % 101) / 100
         }
     }
 
     function distributeA() {
         for (let i = 0; i < 8; i++) {
             let valueA = startA.value + stepA.value * i
-            colors.itemAt(i).value.a = (valueA % 255) / 255
+            colors.itemAt(i).value.a = (valueA % 256) / 255
         }
     }
 
@@ -43,7 +43,7 @@ ColumnLayout {
             onValueChanged: Backend.dot.setColors(index, value)
             Connections {
                 target: Backend.dot
-                onColorsChanged: {
+                function onColorsChanged() {
                     let newColor = Backend.dot.colors[index]
                     if (newColor != value) value = newColor
                 }

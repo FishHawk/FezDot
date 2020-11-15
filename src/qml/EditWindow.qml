@@ -51,7 +51,9 @@ ApplicationWindow {
                     }
                     Connections {
                         target: settings
-                        onSelectedThemeChanged: themeSelector.currentIndex = themeSelector.indexOfValue(settings.selectedTheme)
+                        function onSelectedThemeChanged() {
+                            themeSelector.currentIndex = themeSelector.indexOfValue(settings.selectedTheme)
+                        }
                     }
                 }
                 RowLayout{
