@@ -27,7 +27,7 @@ ApplicationWindow {
         visible: false
         onAccepted: {
             Backend.saveTheme(newThemeName)
-            settings.selectedTheme = currentText
+            settings.selectedTheme = newThemeName
         }
     }
 
@@ -102,7 +102,7 @@ ApplicationWindow {
             id: bar
             Layout.fillWidth: true
             Repeater {
-                model: [qsTr("RGB Mode"), qsTr("HSL Mode"), qsTr("Easy Mode")]
+                model: [qsTr("HSLA Mode"), qsTr("RGBA Mode")]
                 TabButton { text: modelData; width: bar.width / model.length }
             }
         }
@@ -115,9 +115,8 @@ ApplicationWindow {
             currentIndex: bar.currentIndex
             interactive: false
 
-            ColorPickerRGB {}
-            ColorPickerHSL {}
-            ColorPickerEasy {}
+            ColorPickerHSLA {}
+            ColorPickerRGBA {}
         }
     }
 }

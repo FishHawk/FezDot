@@ -43,6 +43,12 @@ public:
         }
     }
 
+    Q_INVOKABLE void setColors(int index, QColor color) {
+        m_colors[index] = std::move(color);
+        colorsChanged();
+        update();
+    }
+
 signals:
     void planeChanged();
     void velocity1Changed();
@@ -50,12 +56,6 @@ signals:
     void colorsChanged();
 
 public:
-    // Q_INVOKABLE QColor colors(int index) { return m_colors[index]; }
-    Q_INVOKABLE void setColors(int index, QColor color) {
-        m_colors[index] = std::move(color);
-        colorsChanged();
-        update();
-    }
 
     DotFramebufferObject();
     Renderer *createRenderer() const override;

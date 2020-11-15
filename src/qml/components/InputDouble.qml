@@ -12,24 +12,19 @@ RowLayout {
     property double from: 0.0
     property double to: 1.0
 
-    Label {
-        text: label
-    }
+    Label { text: label }
     Slider {
         Layout.fillWidth:true;
         value: control.value
         from: control.from
         to: control.to
-
         onMoved: control.value = value
     }
     TextField {
         Layout.preferredWidth: 60
         text: control.value.toPrecision(3)
-        validator: DoubleValidator{bottom: control.from; top: control.to;}
+        validator: DoubleValidator { bottom: control.from; top: control.to }
         onAccepted: control.value = parseFloat(text)
     }
-    Item {
-        Layout.fillWidth: true
-    }
+    Item { Layout.fillWidth: true }
 }

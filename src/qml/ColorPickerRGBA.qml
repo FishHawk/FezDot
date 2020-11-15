@@ -1,0 +1,99 @@
+import QtQuick 2.12
+import QtQuick.Layouts 1.12
+
+import "components" as Com
+
+import Backend 1.0
+
+ColumnLayout {
+
+    function distributeR() {
+        for (let i = 0; i < 8; i++) {
+            let valueR = startR.value + stepR.value * i
+            colors.itemAt(i).value.r = (valueR % 255) / 255
+        }
+    }
+
+    function distributeG() {
+        for (let i = 0; i < 8; i++) {
+            let valueG = startG.value + stepG.value * i
+            colors.itemAt(i).value.g = (valueG % 255) / 255
+        }
+    }
+
+    function distributeB() {
+        for (let i = 0; i < 8; i++) {
+            let valueB = startB.value + stepB.value * i
+            colors.itemAt(i).value.b = (valueB % 255) / 255
+        }
+    }
+
+    function distributeA() {
+        for (let i = 0; i < 8; i++) {
+            let valueA = startA.value + stepA.value * i
+            colors.itemAt(i).value.a = (valueA % 255) / 255
+        }
+    }
+
+    Repeater {
+        id: colors
+        model: 8
+        Com.InputColorRGBA {
+            value: Backend.dot.colors[index]
+            onValueChanged: Backend.dot.setColors(index, value)
+            Connections {
+                target: Backend.dot
+                onColorsChanged: {
+                    let newColor = Backend.dot.colors[index]
+                    if (newColor != value) value = newColor
+                }
+            }
+        }
+    }
+
+    RowLayout {
+        Com.InputInt {
+            id: startR
+            label: "Start:"; from: 0; to: 255
+            onValueChanged: distributeR()
+        }
+        Com.InputInt {
+            id: startG
+            label: "Start:"; from: 0; to: 255
+            onValueChanged: distributeG()
+        }
+        Com.InputInt {
+            id: startB
+            label: "Start:"; from: 0; to: 255
+            onValueChanged: distributeB()
+        }
+        Com.InputInt {
+            id: startA
+            label: "Start:"; from: 0; to: 255
+            onValueChanged: distributeA()
+        }
+    }
+
+    RowLayout {
+        Com.InputInt {
+            id: stepR
+            label: "Step:"; from: 0; to: 255
+            onValueChanged: distributeR()
+        }
+        Com.InputInt {
+            id: stepG
+            label: "Step:"; from: 0; to: 255
+            onValueChanged: distributeG()
+        }
+        Com.InputInt {
+            id: stepB
+            label: "Step:"; from: 0; to: 255
+            onValueChanged: distributeB()
+        }
+        Com.InputInt {
+            id: stepA
+            label: "Step:"; from: 0; to: 255
+            onValueChanged: distributeA()
+        }
+    }
+}

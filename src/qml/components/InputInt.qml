@@ -5,31 +5,26 @@ import QtQuick.Controls 2.4
 import "." as Com
 
 RowLayout {
-    id: root
+    id: control
 
     property string label: "label:"
     property int value: from
     property int from: 0
     property int to: 100
 
-    Label {
-        text: label
-    }
+    Label { text: label }
     Slider {
         Layout.fillWidth:true;
-        value: root.value
-        from: root.from
-        to: root.to
-
-        onMoved: root.value = Math.round(value)
+        value: control.value
+        from: control.from
+        to: control.to
+        onMoved: control.value = Math.round(value)
     }
     TextField {
         Layout.preferredWidth: 45
-        text: root.value
-        validator: IntValidator{bottom: root.from; top: root.to;}
-        onAccepted: root.value = parseFloat(text)
+        text: control.value
+        validator: IntValidator { bottom: control.from; top: control.to }
+        onAccepted: control.value = parseInt(text)
     }
-    Item {
-        Layout.fillWidth: true
-    }
+    Item { Layout.fillWidth: true }
 }
