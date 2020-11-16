@@ -48,6 +48,7 @@ ApplicationWindow {
                     onActivated: {
                         Backend.loadTheme(currentText)
                         settings.selectedTheme = currentText
+                        pickerHSLA.setColors()
                     }
                     Connections {
                         target: settings
@@ -116,9 +117,12 @@ ApplicationWindow {
             clip: true
             currentIndex: bar.currentIndex
             interactive: false
+            onCurrentIndexChanged: if (currentIndex == 0) pickerHSLA.setColors()
 
-            ColorPickerHSLA {}
-            ColorPickerRGBA {}
+            ColorPickerHSLA { id: pickerHSLA }
+            ColorPickerRGBA { id: pickerRGBA }
         }
     }
+
+    onVisibleChanged: if (visible) pickerHSLA.setColors()
 }

@@ -7,6 +7,12 @@ import Backend 1.0
 
 ColumnLayout {
 
+    function setColors() {
+        for (let i = 0; i < 8; i++) {
+            colors.itemAt(i).value = Backend.dot.colors[i]
+        }
+    }
+
     function distributeH() {
         for (let i = 0; i < 8; i++) {
             let valueH = startH.value + stepH.value * i
@@ -41,13 +47,6 @@ ColumnLayout {
         Com.InputColorHSLA {
             value: Backend.dot.colors[index]
             onValueChanged: Backend.dot.setColors(index, value)
-            Connections {
-                target: Backend.dot
-                function onColorsChanged() {
-                    let newColor = Backend.dot.colors[index]
-                    if (newColor != value) value = newColor
-                }
-            }
         }
     }
 
