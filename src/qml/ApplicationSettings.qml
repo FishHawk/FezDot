@@ -3,7 +3,7 @@ import QtQuick 2.14
 import Backend 1.0
 
 QtObject {
-    property string selectedTheme: "default"
+    property string selectedTheme
 
     function loadAllSettings() {
         selectedTheme = Backend.loadSetting("selectedTheme", "default");
