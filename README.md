@@ -1,8 +1,8 @@
-# Dot
+# FezDot
 
 ## Description
 
-Dot is a a rotating translucent four-dimensional hypercube, inspired by the [character](https://fez.fandom.com/wiki/Dot) of the same name in the game FEZ.
+FezDot is a rotating translucent four-dimensional hypercube, inspired by the [character](https://fez.fandom.com/wiki/Dot) of the same name in the game FEZ.
 
 ## Screenshots
 

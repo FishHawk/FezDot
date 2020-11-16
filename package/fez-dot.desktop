@@ -1,6 +1,7 @@
 [Desktop Entry]
 Terminal=false
-Name=dot
+Name=Fez Dot
+Icon=fez
 Type=Application
-Exec=dot
+Exec=fez-dot
 Comment=A rotating translucent four dimensions hypercube

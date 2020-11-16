@@ -21,8 +21,8 @@ int main(int argc, char *argv[]) {
     // initialize application
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
-    QApplication::setApplicationName("dot");
-    QApplication::setApplicationDisplayName("Dot");
+    QApplication::setApplicationName("fez-dot");
+    QApplication::setApplicationDisplayName("Fez Dot");
     QApplication::setApplicationVersion("0.1.0");
 
     // initialize dir
