@@ -1,0 +1,6 @@
+[Desktop Entry]
+Terminal=false
+Name=dot
+Type=Application
+Exec=dot
+Comment=A rotating translucent four dimensions hypercube

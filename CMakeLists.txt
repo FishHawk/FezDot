@@ -4,3 +4,6 @@ project(dot
     LANGUAGES CXX)
 
 add_subdirectory(src)
+
+install(TARGETS dot RUNTIME DESTINATION bin)
+install(FILES package/dot.desktop DESTINATION share/applications)
