@@ -52,6 +52,8 @@ ColumnLayout {
     }
 
     RowLayout {
+        Layout.leftMargin: 45
+
         Com.InputInt {
             id: startR
             label: "Start:"; from: 0; to: 255
@@ -75,6 +77,8 @@ ColumnLayout {
     }
 
     RowLayout {
+        Layout.leftMargin: 45
+
         Com.InputInt {
             id: stepR
             label: "Step:"; from: 0; to: 255

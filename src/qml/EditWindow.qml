@@ -111,7 +111,7 @@ ApplicationWindow {
         }
 
         SwipeView {
-            Layout.fillWidth: true
+            Layout.preferredWidth: 1200
             Layout.fillHeight: true
             Layout.margins: 20
             clip: true

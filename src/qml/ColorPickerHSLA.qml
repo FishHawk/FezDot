@@ -51,6 +51,8 @@ ColumnLayout {
     }
 
     RowLayout {
+        Layout.leftMargin: 45
+
         Com.InputInt {
             id: startH
             label: "Start:"; from: 0; to: 360
@@ -74,6 +76,8 @@ ColumnLayout {
     }
 
     RowLayout {
+        Layout.leftMargin: 45
+
         Com.InputInt {
             id: stepH
             label: "Step:"; from: 0; to: 360
