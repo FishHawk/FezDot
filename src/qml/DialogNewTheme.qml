@@ -5,7 +5,6 @@ import QtQuick.Controls 2.12
 import Backend 1.0
 
 Dialog {
-    property string baseThemeName: "default"
     property string newThemeName: newThemeNameInput.text
 
     anchors.centerIn: parent
@@ -17,6 +16,6 @@ Dialog {
     RowLayout {
         spacing: 40
         Label { text: qsTr("Name:") }
-        TextField { id: newThemeNameInput; text: "new theme" }
+        TextField { id: newThemeNameInput; text: qsTr("New Theme") }
     }
 }

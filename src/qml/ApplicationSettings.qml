@@ -6,7 +6,7 @@ QtObject {
     property string selectedTheme
 
     function loadAllSettings() {
-        selectedTheme = Backend.loadSetting("selectedTheme", "default");
+        selectedTheme = Backend.loadSetting("selectedTheme", "Default");
         Backend.loadTheme(selectedTheme)
     }
 

@@ -55,9 +55,9 @@ ApplicationWindow {
                     }
                 }
                 RowLayout{
-                    Button { text: "Save"; onClicked: Backend.saveTheme(themeSelector.currentText) }
-                    Button { text: "Save as"; onClicked: newThemeDialog.open() }
-                    Button { text: "Delete"; onClicked: Backend.deleteTheme(themeSelector.currentText) }
+                    Button { text: qsTr("Save"); onClicked: Backend.saveTheme(themeSelector.currentText) }
+                    Button { text: qsTr("Save as"); onClicked: newThemeDialog.open() }
+                    Button { text: qsTr("Delete"); onClicked: Backend.deleteTheme(themeSelector.currentText) }
                 }
             }
 

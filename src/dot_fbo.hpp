@@ -1,5 +1,4 @@
-#ifndef DOT_FBO_HPP
-#define DOT_FBO_HPP
+#pragma once
 
 #include <utility>
 
@@ -7,7 +6,7 @@
 
 class DotFramebufferObject : public QQuickFramebufferObject {
     Q_OBJECT
-public:
+  public:
     Q_PROPERTY(RotatePlane plane READ plane WRITE setPlane NOTIFY planeChanged)
     Q_PROPERTY(double velocity1 READ velocity1 WRITE setVelocity1 NOTIFY velocity1Changed)
     Q_PROPERTY(double velocity2 READ velocity2 WRITE setVelocity2 NOTIFY velocity2Changed)
@@ -49,23 +48,20 @@ public:
         update();
     }
 
-signals:
+  signals:
     void planeChanged();
     void velocity1Changed();
     void velocity2Changed();
     void colorsChanged();
 
-public:
-
+  public:
     DotFramebufferObject();
     Renderer *createRenderer() const override;
 
-private:
+  private:
     RotatePlane m_plane;
     double m_velocity1;
     double m_velocity2;
 
     QVector<QColor> m_colors;
 };
-
-#endif

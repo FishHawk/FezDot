@@ -1,8 +1,7 @@
-#ifndef DOT_RENDER_HPP
-#define DOT_RENDER_HPP
+#pragma once
 
-#include <QtCore/QtMath>
 #include <QtCore/QElapsedTimer>
+#include <QtCore/QtMath>
 #include <QtGui/QMatrix4x4>
 #include <QtGui/QOpenGLBuffer>
 #include <QtGui/QOpenGLFramebufferObject>
@@ -15,7 +14,7 @@
 #include "dot_fbo.hpp"
 
 class DotRender : public QQuickFramebufferObject::Renderer, public QOpenGLFunctions_3_3_Core {
-public:
+  public:
     DotRender();
 
     void render() override;
@@ -24,7 +23,7 @@ public:
 
     QOpenGLFramebufferObject *createFramebufferObject(const QSize &size) override;
 
-private:
+  private:
     void GenerateVaoLine();
     void GenerateVaoFace();
 
@@ -57,7 +56,4 @@ private:
     double m_angle2 = 0;
 
     QElapsedTimer timer;
-
 };
-
-#endif

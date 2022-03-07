@@ -16,7 +16,7 @@ Backend::Backend(int size, int x, int y) : m_size(size), m_x(x), m_y(y) {
     QSettings settings(QGuiApplication::applicationName());
 
     // create dot by theme
-    QString theme = settings.value("theme", "default").toString();
+    QString theme = settings.value("theme", "Default").toString();
     loadTheme(theme);
 }
 
@@ -25,8 +25,8 @@ void Backend::loadThemeList() {
     m_themes = QDir(themeLocation).entryList(QStringList() << "*.conf", QDir::Files);
     for (auto &theme : m_themes)
         theme.truncate(theme.lastIndexOf(QChar('.')));
-    if (!m_themes.contains("default"))
-        m_themes.append("default");
+    if (!m_themes.contains("Default"))
+        m_themes.append("Default");
 
     themesChanged();
 }

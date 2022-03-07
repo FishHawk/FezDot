@@ -18,7 +18,7 @@ void getIntOption(const QCommandLineParser &parser, const QString &name, int &va
         auto new_value = parser.value(name).toInt(&ok);
         if (!ok) {
             qInfo() << "Illegal argument: " << name;
-            exit(1);
+            exit(EXIT_FAILURE);
         }
         value = new_value;
     }
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/MainWindow.qml")));
     if (engine.rootObjects().isEmpty())
-        return -1;
+        return EXIT_FAILURE;
 
     return QApplication::exec();
 }

@@ -55,22 +55,22 @@ ColumnLayout {
 
         Com.InputInt {
             id: startH
-            label: "Start:"; from: 0; to: 360
+            label: qsTr("Start:"); from: 0; to: 360
             onValueChanged: distributeH()
         }
         Com.InputInt {
             id: startS
-            label: "Start:"; from: 0; to: 100
+            label: qsTr("Start:"); from: 0; to: 100
             onValueChanged: distributeS()
         }
         Com.InputInt {
             id: startL
-            label: "Start:"; from: 0; to: 100
+            label: qsTr("Start:"); from: 0; to: 100
             onValueChanged: distributeL()
         }
         Com.InputInt {
             id: startA
-            label: "Start:"; from: 0; to: 255
+            label: qsTr("Start:"); from: 0; to: 255
             onValueChanged: distributeA()
         }
     }
@@ -80,22 +80,22 @@ ColumnLayout {
 
         Com.InputInt {
             id: stepH
-            label: "Step:"; from: 0; to: 360
+            label: qsTr("Step:"); from: 0; to: 360
             onValueChanged: distributeH()
         }
         Com.InputInt {
             id: stepS
-            label: "Step:"; from: 0; to: 100
+            label: qsTr("Step:"); from: 0; to: 100
             onValueChanged: distributeS()
         }
         Com.InputInt {
             id: stepL
-            label: "Step:"; from: 0; to: 100
+            label: qsTr("Step:"); from: 0; to: 100
             onValueChanged: distributeL()
         }
         Com.InputInt {
             id: stepA
-            label: "Step:"; from: 0; to: 255
+            label: qsTr("Step:"); from: 0; to: 255
             onValueChanged: distributeA()
         }
     }

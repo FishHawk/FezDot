@@ -1,5 +1,4 @@
-#ifndef BACKEND_HPP
-#define BACKEND_HPP
+#pragma once
 
 #include <QObject>
 #include <QSettings>
@@ -57,5 +56,3 @@ class Backend : public QObject {
 
     void loadThemeList();
 };
-
-#endif
