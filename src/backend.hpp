@@ -43,6 +43,11 @@ class Backend : public QObject {
         m_settings.setValue(key, value);
     }
 
+  private slots:
+    void onXChanged() { saveSetting("x", m_x); }
+    void onYChanged() { saveSetting("y", m_y); }
+    void onSizeChanged() { saveSetting("size", m_size); }
+
   private:
     int m_size, m_x, m_y;
 

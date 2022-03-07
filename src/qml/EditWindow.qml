@@ -62,6 +62,14 @@ ApplicationWindow {
             }
 
             ColumnLayout {
+                Com.InputDouble {
+                    label: qsTr("Size:")
+                    value: Backend.size
+                    from: 20
+                    to: 800
+                    onValueChanged: Backend.size = value
+                }
+
                 RowLayout {
                     Label { text: qsTr("Rotate Plane:") }
                     RadioButton {

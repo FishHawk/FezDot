@@ -12,16 +12,51 @@
 static Backend *backend;
 static QObject *getBackend(QQmlEngine *, QJSEngine *) { return backend; }
 
-void getIntOption(const QCommandLineParser &parser, const QString &name, int &value) {
+uint getIntOption(
+    const QCommandLineParser &parser,
+    const QSettings &settings,
+    const QString &name,
+    uint defaultValue) {
+
+    bool ok;
+    uint value;
     if (parser.isSet(name)) {
-        bool ok;
-        auto new_value = parser.value(name).toInt(&ok);
-        if (!ok) {
-            qInfo() << "Illegal argument: " << name;
-            exit(EXIT_FAILURE);
-        }
-        value = new_value;
+        value = parser.value(name).toInt(&ok);
+    } else {
+        value = settings.value(name, defaultValue).toInt(&ok);
     }
+    if (!ok) {
+        qInfo() << "Illegal argument: " << name;
+        exit(EXIT_FAILURE);
+    }
+    return value;
+}
+
+std::tuple<uint, uint, uint> parseCommandLine(const QApplication &app) {
+    QCommandLineParser parser;
+    parser.setApplicationDescription("A rotating translucent four dimensions hypercube.");
+    parser.addOptions({
+        {"size",
+         QCoreApplication::translate("main", "Set window size."),
+         QCoreApplication::translate("main", "size")},
+        {"x",
+         QCoreApplication::translate("main", "Set window position x."),
+         QCoreApplication::translate("main", "position-x")},
+        {"y",
+         QCoreApplication::translate("main", "Set window position y."),
+         QCoreApplication::translate("main", "position-y")},
+    });
+    parser.addHelpOption();
+    parser.addVersionOption();
+    parser.process(app);
+
+    QSettings settings{"settings"};
+    auto size = getIntOption(parser, settings, "size", 300u);
+    auto screenSize = app.primaryScreen()->size();
+    auto x = getIntOption(parser, settings, "x", (screenSize.width() - size) / 2);
+    auto y = getIntOption(parser, settings, "y", (screenSize.height() - size) / 2);
+
+    return {size, x, y};
 }
 
 int main(int argc, char *argv[]) {
@@ -50,31 +85,7 @@ int main(int argc, char *argv[]) {
                        QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
 
     // parse commandline
-    QCommandLineParser parser;
-    parser.setApplicationDescription("A rotating translucent four dimensions hypercube.");
-    parser.addOptions({
-        {"size",
-         QCoreApplication::translate("main", "Set window size."),
-         QCoreApplication::translate("main", "size")},
-        {"x",
-         QCoreApplication::translate("main", "Set window position x."),
-         QCoreApplication::translate("main", "position-x")},
-        {"y",
-         QCoreApplication::translate("main", "Set window position y."),
-         QCoreApplication::translate("main", "position-y")},
-    });
-    parser.addHelpOption();
-    parser.addVersionOption();
-    parser.process(app);
-
-    auto size = 300;
-    getIntOption(parser, "size", size);
-
-    auto screen_size = app.primaryScreen()->size();
-    auto x = screen_size.width() / 2 - size / 2;
-    auto y = screen_size.height() / 2 - size / 2;
-    getIntOption(parser, "x", x);
-    getIntOption(parser, "y", y);
+    auto [size, x, y] = parseCommandLine(app);
 
     // start backend
     backend = new Backend(size, x, y);

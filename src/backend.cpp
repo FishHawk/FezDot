@@ -18,6 +18,14 @@ Backend::Backend(int size, int x, int y) : m_size(size), m_x(x), m_y(y) {
     // create dot by theme
     QString theme = settings.value("theme", "Default").toString();
     loadTheme(theme);
+
+    onXChanged();
+    onYChanged();
+    onSizeChanged();
+
+    connect(this, &Backend::xChanged, this, &Backend::onXChanged);
+    connect(this, &Backend::yChanged, this, &Backend::onYChanged);
+    connect(this, &Backend::sizeChanged, this, &Backend::onSizeChanged);
 }
 
 void Backend::loadThemeList() {

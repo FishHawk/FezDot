@@ -6,6 +6,8 @@ import Backend 1.0
 ApplicationWindow {
     id: mainWindow
 
+    property int size: Backend.size
+
     function calculateFlags(){
         let flags = Qt.Window | Qt.Tool | Qt.FramelessWindowHint | Qt.WindowSystemMenuHint
         if (Backend.layer == Backend.AboveOthers) flags = flags | Qt.WindowStaysOnTopHint
@@ -16,14 +18,18 @@ ApplicationWindow {
     x: Backend.x
     y: Backend.y
 
-    width: Backend.size
-    height: Backend.size
+    width: size
+    height: size
 
-    maximumHeight: height
-    maximumWidth: width
+    maximumHeight: size
+    maximumWidth: size
 
-    minimumHeight: height
-    minimumWidth: width
+    minimumHeight: size
+    minimumWidth: size
+
+    onXChanged: Backend.x = x
+    onYChanged: Backend.y = y
+    onSizeChanged: Backend.size = size
 
     visible: true
     title: qsTr("Dot Render")
