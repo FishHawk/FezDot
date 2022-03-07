@@ -13,8 +13,17 @@ ApplicationWindow {
         return flags
     }
 
-    width: 400
-    height: 400
+    x: Backend.x
+    y: Backend.y
+
+    width: Backend.size
+    height: Backend.size
+
+    maximumHeight: height
+    maximumWidth: width
+
+    minimumHeight: height
+    minimumWidth: width
 
     visible: true
     title: qsTr("Dot Render")

@@ -5,7 +5,7 @@
 #include <QDir>
 #include <QStandardPaths>
 
-Backend::Backend() {
+Backend::Backend(int size, int x, int y) : m_size(size), m_x(x), m_y(y) {
     m_dot = new DotFramebufferObject();
 
     loadThemeList();

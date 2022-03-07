@@ -9,6 +9,9 @@
 class Backend : public QObject {
     Q_OBJECT
   public:
+    Q_PROPERTY(int size MEMBER m_size NOTIFY sizeChanged)
+    Q_PROPERTY(int x MEMBER m_x NOTIFY xChanged)
+    Q_PROPERTY(int y MEMBER m_y NOTIFY yChanged)
     Q_PROPERTY(WindowLayer layer MEMBER m_layer NOTIFY layerChanged)
     enum WindowLayer { AboveOthers,
                        BelowOthers,
@@ -21,6 +24,9 @@ class Backend : public QObject {
     DotFramebufferObject *dot() { return m_dot; }
 
   signals:
+    void xChanged();
+    void yChanged();
+    void sizeChanged();
     void layerChanged();
     void themesChanged();
 
@@ -29,7 +35,7 @@ class Backend : public QObject {
     Q_INVOKABLE void loadTheme(QString theme);
     Q_INVOKABLE void deleteTheme(QString theme);
 
-    Backend();
+    Backend(int size, int x, int y);
 
     Q_INVOKABLE QVariant loadSetting(const QString &key, const QVariant &defaultValue = QVariant()) {
         return m_settings.value(key, defaultValue);
@@ -39,6 +45,8 @@ class Backend : public QObject {
     }
 
   private:
+    int m_size, m_x, m_y;
+
     WindowLayer m_layer{WindowLayer::AboveOthers};
 
     QSettings m_settings{"settings"};
