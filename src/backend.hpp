@@ -8,16 +8,23 @@
 
 class Backend : public QObject {
     Q_OBJECT
-public:
+  public:
+    Q_PROPERTY(WindowLayer layer MEMBER m_layer NOTIFY layerChanged)
+    enum WindowLayer { AboveOthers,
+                       BelowOthers,
+                       Normal };
+    Q_ENUM(WindowLayer)
+
     Q_PROPERTY(QStringList themes MEMBER m_themes NOTIFY themesChanged)
 
     Q_PROPERTY(DotFramebufferObject *dot READ dot CONSTANT)
     DotFramebufferObject *dot() { return m_dot; }
 
-signals:
+  signals:
+    void layerChanged();
     void themesChanged();
 
-public:
+  public:
     Q_INVOKABLE void saveTheme(QString theme);
     Q_INVOKABLE void loadTheme(QString theme);
     Q_INVOKABLE void deleteTheme(QString theme);
@@ -31,7 +38,9 @@ public:
         m_settings.setValue(key, value);
     }
 
-private:
+  private:
+    WindowLayer m_layer{WindowLayer::AboveOthers};
+
     QSettings m_settings{"settings"};
 
     QStringList m_themes;
