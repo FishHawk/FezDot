@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     QApplication::setApplicationName("fez-dot");
     QApplication::setApplicationDisplayName("Fez Dot");
-    QApplication::setApplicationVersion("0.1.0");
+    QApplication::setApplicationVersion("0.1.1");
 
     // initialize dir
     QString configLocation = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
