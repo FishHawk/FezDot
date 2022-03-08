@@ -22,10 +22,12 @@ Backend::Backend(int size, int x, int y) : m_size(size), m_x(x), m_y(y) {
     onXChanged();
     onYChanged();
     onSizeChanged();
+    onLayerChanged();
 
     connect(this, &Backend::xChanged, this, &Backend::onXChanged);
     connect(this, &Backend::yChanged, this, &Backend::onYChanged);
     connect(this, &Backend::sizeChanged, this, &Backend::onSizeChanged);
+    connect(this, &Backend::layerChanged, this, &Backend::onLayerChanged);
 }
 
 void Backend::loadThemeList() {

@@ -37,16 +37,7 @@ class DotRender : public QQuickFramebufferObject::Renderer, public QOpenGLFuncti
     QOpenGLVertexArrayObject vao_face;
     QOpenGLBuffer vbo_face_position, vbo_face_color;
 
-    QVector4D m_colors[8]{
-        QVector4D(0.5f, 0.5f, 0.0f, 1.6f) / 2,
-        QVector4D(0.8f, 0.2f, 0.0f, 1.6f) / 2,
-        QVector4D(0.8f, 0.0f, 0.2f, 1.6f) / 2,
-        QVector4D(0.0f, 0.8f, 0.2f, 1.6f) / 2,
-        QVector4D(0.2f, 0.8f, 0.0f, 1.6f) / 2,
-        QVector4D(0.2f, 0.0f, 0.8f, 1.6f) / 2,
-        QVector4D(0.0f, 0.2f, 0.8f, 1.6f) / 2,
-        QVector4D(0.0f, 0.5f, 0.5f, 1.6f) / 2,
-    };
+    QVector4D m_colors[8]{};
 
     DotFramebufferObject::RotatePlane m_plane = DotFramebufferObject::XY;
     double m_angleVelocity1 = 0.0;
