@@ -45,7 +45,7 @@ ApplicationWindow {
                     onActivated: {
                         Backend.loadTheme(currentText)
                         settings.selectedTheme = currentText
-                        pickerHSLA.setColors()
+                        pickerHSL.setColors()
                     }
                     Connections {
                         target: settings
@@ -103,6 +103,14 @@ ApplicationWindow {
                     to: 1.0
                     onValueChanged: Backend.dot.velocity2 = value
                 }
+
+                Com.InputDouble {
+                    label: qsTr("Opacity:")
+                    value: Backend.dot.opacity
+                    from: 0
+                    to: 1
+                    onValueChanged: Backend.dot.opacity = value
+                }
             }
         }
 
@@ -110,24 +118,24 @@ ApplicationWindow {
             id: bar
             Layout.fillWidth: true
             Repeater {
-                model: [qsTr("HSLA Mode"), qsTr("RGBA Mode")]
+                model: [qsTr("HSL Mode"), qsTr("RGB Mode")]
                 TabButton { text: modelData; width: bar.width / model.length }
             }
         }
 
         SwipeView {
-            Layout.preferredWidth: 1200
+            Layout.preferredWidth: 800
             Layout.fillHeight: true
             Layout.margins: 20
             clip: true
             currentIndex: bar.currentIndex
             interactive: false
-            onCurrentIndexChanged: if (currentIndex == 0) pickerHSLA.setColors()
+            onCurrentIndexChanged: if (currentIndex == 0) pickerHSL.setColors()
 
-            ColorPickerHSLA { id: pickerHSLA }
-            ColorPickerRGBA { id: pickerRGBA }
+            ColorPickerHSL { id: pickerHSL }
+            ColorPickerRGB { id: pickerRGB }
         }
     }
 
-    onVisibleChanged: if (visible) pickerHSLA.setColors()
+    onVisibleChanged: if (visible) pickerHSL.setColors()
 }

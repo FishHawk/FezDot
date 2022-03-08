@@ -10,4 +10,9 @@ QQuickFramebufferObject::Renderer *DotFramebufferObject::createRenderer() const 
 }
 
 DotFramebufferObject::DotFramebufferObject() : m_colors(8) {
+    connect(this, &DotFramebufferObject::planeChanged, this, &QQuickItem::update);
+    connect(this, &DotFramebufferObject::velocity1Changed, this, &QQuickItem::update);
+    connect(this, &DotFramebufferObject::velocity2Changed, this, &QQuickItem::update);
+    connect(this, &DotFramebufferObject::opacityChanged, this, &QQuickItem::update);
+    connect(this, &DotFramebufferObject::colorsChanged, this, &QQuickItem::update);
 }

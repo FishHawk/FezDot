@@ -13,7 +13,6 @@ RowLayout {
         inputH.value = value.hslHue * 360
         inputS.value = value.hslSaturation * 100
         inputL.value = value.hslLightness * 100
-        inputA.value = value.a * 255
     }
 
     Rectangle {
@@ -30,6 +29,7 @@ RowLayout {
         }
         Rectangle { color: control.value; width: 40; height: 40; border.width: 1 }
     }
+
     Com.InputInt {
         id: inputH
         label: "H:"; from: 0; to: 360
@@ -44,10 +44,5 @@ RowLayout {
         id: inputL
         label: "L:"; from: 0; to: 100
         onValueChanged: control.value.hslLightness = value / 100
-    }
-    Com.InputInt {
-        id: inputA
-        label: "A:"; from: 0; to: 255
-        onValueChanged: control.value.a = value / 255
     }
 }

@@ -38,7 +38,7 @@ ColumnLayout {
     Repeater {
         id: colors
         model: 8
-        Com.InputColorRGBA {
+        Com.InputColorRGB {
             value: Backend.dot.colors[index]
             onValueChanged: Backend.dot.setColors(index, value)
             Connections {
@@ -54,50 +54,43 @@ ColumnLayout {
     RowLayout {
         Layout.leftMargin: 45
 
-        Com.InputInt {
-            id: startR
-            label: qsTr("Start:"); from: 0; to: 255
-            onValueChanged: distributeR()
+        ColumnLayout {
+            Com.InputInt {
+                id: startR
+                label: qsTr("Start:"); from: 0; to: 255
+                onValueChanged: distributeR()
+            }
+            Com.InputInt {
+                id: stepR
+                label: qsTr("Step:"); from: 0; to: 255
+                onValueChanged: distributeR()
+            }
         }
-        Com.InputInt {
-            id: startG
-            label: qsTr("Start:"); from: 0; to: 255
-            onValueChanged: distributeG()
-        }
-        Com.InputInt {
-            id: startB
-            label: qsTr("Start:"); from: 0; to: 255
-            onValueChanged: distributeB()
-        }
-        Com.InputInt {
-            id: startA
-            label: qsTr("Start:"); from: 0; to: 255
-            onValueChanged: distributeA()
-        }
-    }
 
-    RowLayout {
-        Layout.leftMargin: 45
+        ColumnLayout {
+            Com.InputInt {
+                id: startG
+                label: qsTr("Start:"); from: 0; to: 255
+                onValueChanged: distributeG()
+            }
+            Com.InputInt {
+                id: stepG
+                label: qsTr("Step:"); from: 0; to: 255
+                onValueChanged: distributeG()
+            }
+        }
 
-        Com.InputInt {
-            id: stepR
-            label: qsTr("Step:"); from: 0; to: 255
-            onValueChanged: distributeR()
-        }
-        Com.InputInt {
-            id: stepG
-            label: qsTr("Step:"); from: 0; to: 255
-            onValueChanged: distributeG()
-        }
-        Com.InputInt {
-            id: stepB
-            label: qsTr("Step:"); from: 0; to: 255
-            onValueChanged: distributeB()
-        }
-        Com.InputInt {
-            id: stepA
-            label: qsTr("Step:"); from: 0; to: 255
-            onValueChanged: distributeA()
+        ColumnLayout {
+            Com.InputInt {
+                id: startB
+                label: qsTr("Start:"); from: 0; to: 255
+                onValueChanged: distributeB()
+            }
+            Com.InputInt {
+                id: stepB
+                label: qsTr("Step:"); from: 0; to: 255
+                onValueChanged: distributeB()
+            }
         }
     }
 }

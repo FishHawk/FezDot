@@ -13,7 +13,6 @@ RowLayout {
         inputR.value = value.r * 255
         inputG.value = value.g * 255
         inputB.value = value.b * 255
-        inputA.value = value.a * 255
     }
 
     Rectangle {
@@ -30,6 +29,7 @@ RowLayout {
         }
         Rectangle { color: control.value; width: 40; height: 40; border.width: 1 }
     }
+
     Com.InputInt {
         id: inputR
         label: "R:"; from: 0; to: 255
@@ -44,10 +44,5 @@ RowLayout {
         id: inputB
         label: "B:"; from: 0; to: 255
         onValueChanged: control.value.b = value / 255
-    }
-    Com.InputInt {
-        id: inputA
-        label: "A:"; from: 0; to: 255
-        onValueChanged: control.value.a = value / 255
     }
 }

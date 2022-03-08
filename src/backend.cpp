@@ -45,6 +45,7 @@ void Backend::saveTheme(QString theme) {
     settings.setValue("plane", m_dot->plane());
     settings.setValue("velocity1", m_dot->velocity1());
     settings.setValue("velocity2", m_dot->velocity2());
+    settings.setValue("opacity", m_dot->opacity());
     for (int i = 0; i < 8; ++i) {
         settings.setValue(QString("color%1").arg(i), (m_dot->colors())[i]);
     }
@@ -59,6 +60,7 @@ void Backend::loadTheme(QString theme) {
     m_dot->setPlane(static_cast<DotFramebufferObject::RotatePlane>(settings.value("plane", 0).toUInt()));
     m_dot->setVelocity1(settings.value("velocity1", 0.2).toDouble());
     m_dot->setVelocity2(settings.value("velocity2", -0.3).toDouble());
+    m_dot->setOpacity(settings.value("opacity", 0.6).toDouble());
     for (int i = 0; i < 8; ++i) {
         m_dot->setColors(i, settings.value(QString("color%1").arg(i), QColor::fromHslF((i % 4) * 0.25, 1.0, 0.2, 0.6)).value<QColor>());
     }

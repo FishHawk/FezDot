@@ -29,7 +29,7 @@ void DotRender::synchronize(QQuickFramebufferObject *item) {
         m_colors[i].setX(static_cast<float>(color.redF()));
         m_colors[i].setY(static_cast<float>(color.greenF()));
         m_colors[i].setZ(static_cast<float>(color.blueF()));
-        m_colors[i].setW(static_cast<float>(color.alphaF()));
+        m_colors[i].setW(static_cast<float>(derived->opacity()));
     }
 
     QVector4D face_color[6 * 6 * 8];

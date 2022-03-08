@@ -14,7 +14,7 @@ RowLayout {
 
     Label { text: label }
     Slider {
-        Layout.fillWidth:true;
+        Layout.fillWidth: true;
         value: control.value
         from: control.from
         to: control.to
@@ -26,5 +26,4 @@ RowLayout {
         validator: IntValidator { bottom: control.from; top: control.to }
         onAccepted: control.value = parseInt(text)
     }
-    Item { Layout.fillWidth: true }
 }

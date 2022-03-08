@@ -9,11 +9,11 @@
 
         <file>DialogNewTheme.qml</file>
 
-        <file>ColorPickerHSLA.qml</file>
-        <file>ColorPickerRGBA.qml</file>
+        <file>ColorPickerHSL.qml</file>
+        <file>ColorPickerRGB.qml</file>
 
-        <file>components/InputColorRGBA.qml</file>
-        <file>components/InputColorHSLA.qml</file>
+        <file>components/InputColorRGB.qml</file>
+        <file>components/InputColorHSL.qml</file>
         <file>components/InputInt.qml</file>
         <file>components/InputDouble.qml</file>
     </qresource>
