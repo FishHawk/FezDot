@@ -15,16 +15,19 @@ yay -S fez-dot
 ```
 
 ## Usage
+`Ctrl+E` to open the edit window. `Ctrl+Q` to quit dot.
 
 ```
 Usage: fez-dot [options]
 A rotating translucent four dimensions tesseract.
 
 Options:
-  --size <size>    Set window size.
-  -x <position-x>  Set window position x.
-  -y <position-y>  Set window position y.
   -h, --help       Displays help on commandline options.
   --help-all       Displays help including Qt specific options.
   -v, --version    Displays version information.
+  --size <size>    Set window size.
+  -x <position-x>  Set window position x.
+  -y <position-y>  Set window position y.
+  --layer <layer>  Set window layer. 0:Above others, 1:Below others, 2:Normal.
+  --theme <theme>  Set dot theme.
 ```
