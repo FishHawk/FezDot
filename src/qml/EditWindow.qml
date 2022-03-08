@@ -17,14 +17,12 @@ ApplicationWindow {
     maximumHeight: height
     maximumWidth: width
 
-    onClosing: settings.saveAllSettings()
-
     DialogNewTheme {
         id: newThemeDialog
         visible: false
         onAccepted: {
             Backend.saveTheme(newThemeName)
-            settings.selectedTheme = newThemeName
+            Backend.theme = newThemeName
         }
     }
 
@@ -44,14 +42,11 @@ ApplicationWindow {
                     model: Backend.themes
                     onActivated: {
                         Backend.loadTheme(currentText)
-                        settings.selectedTheme = currentText
+                        Backend.theme = currentText
                         pickerHSL.setColors()
                     }
-                    Connections {
-                        target: settings
-                        function onSelectedThemeChanged() {
-                            themeSelector.currentIndex = themeSelector.indexOfValue(settings.selectedTheme)
-                        }
+                    Component.onCompleted: {
+                        themeSelector.currentIndex = themeSelector.indexOfValue(Backend.theme)
                     }
                 }
                 RowLayout{

@@ -36,8 +36,6 @@ ApplicationWindow {
     color: "transparent"
     flags: calculateFlags()
 
-    ApplicationSettings { id: settings }
-
     DotView { anchors.fill: parent }
 
     MouseArea {

@@ -1,33 +1,64 @@
 #include "backend.hpp"
 
-#include <QApplication>
-#include <QDebug>
-#include <QDir>
-#include <QStandardPaths>
+#include <QtCore/QDir>
+#include <QtCore/QStandardPaths>
+#include <QtGui/QScreen>
+#include <QtWidgets/QApplication>
 
-Backend::Backend(int size, int x, int y) : m_size(size), m_x(x), m_y(y) {
-    m_dot = new DotFramebufferObject();
+uint getIntOption(
+    const QCommandLineParser &parser,
+    QSettings &settings,
+    const QString &name,
+    uint defaultValue) {
+
+    bool ok;
+    uint value;
+    if (parser.isSet(name)) {
+        value = parser.value(name).toInt(&ok);
+        settings.setValue(name, value);
+    } else {
+        value = settings.value(name, defaultValue).toInt(&ok);
+    }
+    if (!ok) {
+        qInfo() << "Illegal argument: " << name;
+        exit(EXIT_FAILURE);
+    }
+    return value;
+}
+
+QString getStringOption(
+    const QCommandLineParser &parser,
+    QSettings &settings,
+    const QString &name,
+    QString defaultValue) {
+
+    QString value;
+    if (parser.isSet(name)) {
+        value = parser.value(name);
+        settings.setValue(name, value);
+    } else {
+        value = settings.value(name, defaultValue).toString();
+    }
+    return value;
+}
+
+Backend::Backend(const QCommandLineParser &parser) {
+    m_size = getIntOption(parser, m_settings, "size", 300u);
+    auto screenSize = QApplication::primaryScreen()->size();
+    m_x = getIntOption(parser, m_settings, "x", (screenSize.width() - m_size) / 2);
+    m_y = getIntOption(parser, m_settings, "y", (screenSize.height() - m_size) / 2);
+    m_layer = static_cast<WindowLayer>(getIntOption(parser, m_settings, "layer", 0));
+
+    m_theme = getStringOption(parser, m_settings, "theme", "Default");
+    loadTheme(m_theme);
 
     loadThemeList();
-
-    // read settings
-    QSettings::setPath(QSettings::defaultFormat(), QSettings::UserScope,
-                       QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation));
-    QSettings settings(QGuiApplication::applicationName());
-
-    // create dot by theme
-    QString theme = settings.value("theme", "Default").toString();
-    loadTheme(theme);
-
-    onXChanged();
-    onYChanged();
-    onSizeChanged();
-    onLayerChanged();
 
     connect(this, &Backend::xChanged, this, &Backend::onXChanged);
     connect(this, &Backend::yChanged, this, &Backend::onYChanged);
     connect(this, &Backend::sizeChanged, this, &Backend::onSizeChanged);
     connect(this, &Backend::layerChanged, this, &Backend::onLayerChanged);
+    connect(this, &Backend::themeChanged, this, &Backend::onThemeChanged);
 }
 
 void Backend::loadThemeList() {
@@ -37,43 +68,23 @@ void Backend::loadThemeList() {
         theme.truncate(theme.lastIndexOf(QChar('.')));
     if (!m_themes.contains("Default"))
         m_themes.append("Default");
-
     themesChanged();
 }
 
 void Backend::saveTheme(QString theme) {
     QSettings settings("themes/" + theme);
-
-    settings.setValue("plane", m_dot->plane());
-    settings.setValue("velocity1", m_dot->velocity1());
-    settings.setValue("velocity2", m_dot->velocity2());
-    settings.setValue("opacity", m_dot->opacity());
-    for (int i = 0; i < 8; ++i) {
-        settings.setValue(QString("color%1").arg(i), (m_dot->colors())[i]);
-    }
-    settings.sync();
-
+    m_dot->saveTheme(settings);
     loadThemeList();
 }
 
 void Backend::loadTheme(QString theme) {
     QSettings settings("themes/" + theme);
-
-    m_dot->setPlane(static_cast<DotFramebufferObject::RotatePlane>(settings.value("plane", 0).toUInt()));
-    m_dot->setVelocity1(settings.value("velocity1", 0.2).toDouble());
-    m_dot->setVelocity2(settings.value("velocity2", -0.3).toDouble());
-    m_dot->setOpacity(settings.value("opacity", 0.6).toDouble());
-    for (int i = 0; i < 8; ++i) {
-        m_dot->setColors(i, settings.value(QString("color%1").arg(i), QColor::fromHslF((i % 4) * 0.25, 1.0, 0.2, 0.6)).value<QColor>());
-    }
-
-    loadThemeList();
+    m_dot->loadTheme(settings);
 }
 
 void Backend::deleteTheme(QString theme) {
     auto filepath = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation).append(QString("/themes/%1.conf").arg(theme));
     auto file = QFile(filepath);
     file.remove();
-
     loadThemeList();
 }

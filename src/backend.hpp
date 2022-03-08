@@ -1,32 +1,33 @@
 #pragma once
 
-#include <QObject>
-#include <QSettings>
+#include <QtCore/QCommandLineParser>
+#include <QtCore/QSettings>
 
 #include "dot_fbo.hpp"
 
 class Backend : public QObject {
     Q_OBJECT
   public:
+    Q_PROPERTY(DotFramebufferObject *dot MEMBER m_dot CONSTANT)
+
     Q_PROPERTY(int size MEMBER m_size NOTIFY sizeChanged)
     Q_PROPERTY(int x MEMBER m_x NOTIFY xChanged)
     Q_PROPERTY(int y MEMBER m_y NOTIFY yChanged)
     Q_PROPERTY(WindowLayer layer MEMBER m_layer NOTIFY layerChanged)
+    Q_PROPERTY(QString theme MEMBER m_theme NOTIFY themeChanged)
+    Q_PROPERTY(QStringList themes MEMBER m_themes NOTIFY themesChanged)
+
     enum WindowLayer { AboveOthers,
                        BelowOthers,
                        Normal };
     Q_ENUM(WindowLayer)
-
-    Q_PROPERTY(QStringList themes MEMBER m_themes NOTIFY themesChanged)
-
-    Q_PROPERTY(DotFramebufferObject *dot READ dot CONSTANT)
-    DotFramebufferObject *dot() { return m_dot; }
 
   signals:
     void xChanged();
     void yChanged();
     void sizeChanged();
     void layerChanged();
+    void themeChanged();
     void themesChanged();
 
   private slots:
@@ -34,9 +35,10 @@ class Backend : public QObject {
     void onYChanged() { m_settings.setValue("y", m_y); }
     void onSizeChanged() { m_settings.setValue("size", m_size); }
     void onLayerChanged() { m_settings.setValue("layer", m_layer); }
+    void onThemeChanged() { m_settings.setValue("theme", m_theme); }
 
   public:
-    Backend(int size, int x, int y);
+    Backend(const QCommandLineParser &parser);
 
     Q_INVOKABLE void saveTheme(QString theme);
     Q_INVOKABLE void loadTheme(QString theme);
@@ -50,14 +52,15 @@ class Backend : public QObject {
     }
 
   private:
-    int m_size, m_x, m_y;
-
     QSettings m_settings{"settings"};
-    WindowLayer m_layer{static_cast<WindowLayer>(m_settings.value("layer", 0).toUInt())};
 
+    DotFramebufferObject *m_dot{new DotFramebufferObject()};
+
+    int m_size, m_x, m_y;
+    WindowLayer m_layer;
+
+    QString m_theme;
     QStringList m_themes;
-
-    DotFramebufferObject *m_dot;
 
     void loadThemeList();
 };

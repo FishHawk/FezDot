@@ -2,51 +2,23 @@
 
 #include <utility>
 
+#include <QtCore/QSettings>
 #include <QtQuick/QQuickFramebufferObject>
 
 class DotFramebufferObject : public QQuickFramebufferObject {
     Q_OBJECT
   public:
-    Q_PROPERTY(RotatePlane plane READ plane WRITE setPlane NOTIFY planeChanged)
-    Q_PROPERTY(double velocity1 READ velocity1 WRITE setVelocity1 NOTIFY velocity1Changed)
-    Q_PROPERTY(double velocity2 READ velocity2 WRITE setVelocity2 NOTIFY velocity2Changed)
-    Q_PROPERTY(double opacity READ opacity WRITE setOpacity NOTIFY opacityChanged)
-    Q_PROPERTY(QVector<QColor> colors READ colors NOTIFY colorsChanged)
+    Q_PROPERTY(RotatePlane plane MEMBER m_plane NOTIFY planeChanged)
+    Q_PROPERTY(double velocity1 MEMBER m_velocity1 NOTIFY velocity1Changed)
+    Q_PROPERTY(double velocity2 MEMBER m_velocity2  NOTIFY velocity2Changed)
+    Q_PROPERTY(double opacity MEMBER m_opacity NOTIFY opacityChanged)
+    Q_PROPERTY(QVector<QColor> colors MEMBER m_colors NOTIFY colorsChanged)
 
     enum RotatePlane { XY,
                        XZ,
                        XW };
     Q_ENUM(RotatePlane)
 
-    RotatePlane plane() { return m_plane; }
-    double velocity1() { return m_velocity1; }
-    double velocity2() { return m_velocity2; }
-    double opacity() { return m_opacity; }
-    QVector<QColor> colors() { return m_colors; }
-
-    void setPlane(RotatePlane plane) {
-        m_plane = plane;
-        planeChanged();
-    }
-    void setVelocity1(double velocity) {
-        if (m_velocity1 != velocity) {
-            m_velocity1 = velocity;
-            velocity1Changed();
-        }
-    }
-    void setVelocity2(double velocity) {
-        if (m_velocity2 != velocity) {
-            m_velocity2 = velocity;
-            velocity2Changed();
-        }
-    }
-
-    void setOpacity(double opacity) {
-        if (m_opacity != opacity) {
-            m_opacity = opacity;
-            opacityChanged();
-        }
-    }
     Q_INVOKABLE void setColors(int index, QColor color) {
         m_colors[index] = std::move(color);
         colorsChanged();
@@ -61,9 +33,15 @@ class DotFramebufferObject : public QQuickFramebufferObject {
 
   public:
     DotFramebufferObject();
+
+    void loadTheme(const QSettings &theme);
+    void saveTheme(QSettings &theme);
+
     Renderer *createRenderer() const override;
 
   private:
+    friend class DotRender;
+
     RotatePlane m_plane;
     double m_velocity1;
     double m_velocity2;

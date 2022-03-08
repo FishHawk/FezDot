@@ -3,12 +3,8 @@
         <file>MainWindow.qml</file>
         <file>EditWindow.qml</file>
 
-        <file>ApplicationSettings.qml</file>
-
         <file>DotView.qml</file>
-
         <file>DialogNewTheme.qml</file>
-
         <file>ColorPickerHSL.qml</file>
         <file>ColorPickerRGB.qml</file>
 

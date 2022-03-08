@@ -1,6 +1,6 @@
 # FezDot
 
-**FezDot** is a rotating translucent four-dimensional hypercube, inspired by the [character](https://fez.fandom.com/wiki/Dot) of the same name in the game FEZ.
+**FezDot** is a rotating translucent four-dimensional tesseract, inspired by the [character](https://fez.fandom.com/wiki/Dot) of the same name in the game FEZ.
 
 | Default                                                      | Theme1 | Theme2 |
 | ------------------------------------------------------------ | ------ | ------ |
@@ -18,7 +18,7 @@ yay -S fez-dot
 
 ```
 Usage: fez-dot [options]
-A rotating translucent four dimensions hypercube.
+A rotating translucent four dimensions tesseract.
 
 Options:
   --size <size>    Set window size.

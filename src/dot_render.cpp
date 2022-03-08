@@ -20,16 +20,16 @@ void DotRender::synchronize(QQuickFramebufferObject *item) {
         window = item->window();
 
     auto derived = qobject_cast<DotFramebufferObject *>(item);
-    m_plane = derived->plane();
-    m_angleVelocity1 = derived->velocity1();
-    m_angleVelocity2 = derived->velocity2();
+    m_plane = derived->m_plane;
+    m_angleVelocity1 = derived->m_velocity1;
+    m_angleVelocity2 = derived->m_velocity2;
 
     for (int i = 0; i < 8; ++i) {
-        auto color = derived->colors()[i];
+        auto color = derived->m_colors[i];
         m_colors[i].setX(static_cast<float>(color.redF()));
         m_colors[i].setY(static_cast<float>(color.greenF()));
         m_colors[i].setZ(static_cast<float>(color.blueF()));
-        m_colors[i].setW(static_cast<float>(derived->opacity()));
+        m_colors[i].setW(static_cast<float>(derived->m_opacity));
     }
 
     QVector4D face_color[6 * 6 * 8];
